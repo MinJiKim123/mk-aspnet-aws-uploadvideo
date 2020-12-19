@@ -1,0 +1,76 @@
+﻿@model UserReviewModel
+@{ 
+    Movie movie = ViewData["Movie"] as Movie;
+    User user = ViewData["User"] as User;
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div style="margin: 8px">
+            <a asp-action="DisplayMovies" asp-controller="Movie" asp-route-userid="@user.Id" class="btn btn-outline-dark">&lt;&lt;Movies List</a>
+        </div>
+        <div class="moviedet-container">
+            <table>
+                <tr>
+                    <td><strong>Movie Title</strong></td>
+                    <td>@movie.Name</td>
+
+                </tr>
+                <tr>
+                    <td><strong>Uploaded By</strong></td>
+                    <td>@movie.UploadedBy.LastName, @movie.UploadedBy.FirstName</td>
+                </tr>
+                <tr>
+                    <td><strong>Uploaded Date</strong></td>
+                    <td>@movie.UploadedDate</td>
+                </tr>
+            </table>
+        </div>
+        <div style="margin: 8px">
+            @using (Html.BeginForm("Download", "Movie", new { MovieId = movie.Id, UserId = user.Id }, FormMethod.Post))
+            {
+                <button class="btn btn-warning" type="submit">Download</button>
+            }
+        </div>
+    </div>
+    
+    <br />
+    @ViewData["Message"]
+    
+</div>
+
+<div style="margin-top: 20px">
+    <hr />
+    <h2>Reviews</h2>
+    <div>
+        <form asp-action="AddReview" asp-controller="Movie">
+            <input type="hidden" asp-for="UserId" value=@user.Id />
+            <input type="hidden" asp-for="MovieId" value=@movie.Id />
+            <label asp-for="Rate"></label>
+            @Html.DropDownListFor(m => m.Rate, Enumerable.Range(1, 5)
+                                        .Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }))
+            <br />
+        
+            @Html.TextAreaFor(m => m.Content, new { style = "width:500px" })
+
+     
+            <input type="submit" value="Post" class="btn btn-secondary btn-sm" />
+        </form>
+    </div>  
+    <div>
+       
+    @foreach(var item in movie.Reviews)
+     {        
+
+        <div class="review">
+            
+            <p><strong>By @item.User.LastName, @item.User.FirstName</strong> <br /> rating : @item.Rate<br />       
+                @item.Content<br />      
+                <em>Created on : @item.CreatedDate</em></p>
+            
+        </div>                    
+     }
+           
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model UserAccountModel
+
+@{
+    ViewData["Title"] = "DisplayMovies";
+}
+
+<div class="row">
+    <div class = "col-md-9">
+    <h2>List of Movies</h2>
+    </div>
+    <div class="col-md-3">
+       <a asp-controller="Movie" asp-action="Upload" asp-route-id=@Model.UserId class="btn btn-info">Upload Movie</a>
+    </div>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UMovies.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UMovies.FirstOrDefault().UploadedDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.UMovies.FirstOrDefault().UploadedBy)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.UMovies)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UploadedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UploadedBy.FullName)
+                    </td>
+                    <td>
+                        <a asp-controller="Movie" asp-action="NavWatch" asp-route-movieId="@item.Id" asp-route-userId="@Model.UserId" class="btn btn-primary">Go Download</a>
+                    </td>
+                    @if (item.UploadedBy.Id == Model.UserId)
+                    {
+                        <td>
+                            @Html.Partial("DeleteForm", item)
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
