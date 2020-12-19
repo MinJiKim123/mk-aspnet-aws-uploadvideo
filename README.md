@@ -10,3 +10,9 @@
 * Users can upload videos and download videos from other users with reviews
 * This project utilizes DyanmoDB and S3 to store and manage files(video) in users choice
 * Default s3 bucket name : _mk-videorepository_
+
+## Things that need improvements
+* Create DynamoDB tables programmically
+* User Token
+* UI
+
