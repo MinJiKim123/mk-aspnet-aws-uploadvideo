@@ -1,7 +1,7 @@
 # ASP.NET web to Upload/Download video
 
 ## Overview
-![image](https://user-images.githubusercontent.com/61156520/110178790-f57bc480-7dd4-11eb-857b-2ac53b40ea7d.png)
+![movie4share](https://user-images.githubusercontent.com/61156520/110178901-25c36300-7dd5-11eb-8fe4-fe8d4f5116bd.gif)
 
 ## Pre-requisite to run this project
 * must have aws 'default' account 
