@@ -1,5 +1,8 @@
 # ASP.NET web to Upload/Download video
 
+## Overview
+![image](https://user-images.githubusercontent.com/61156520/110178790-f57bc480-7dd4-11eb-857b-2ac53b40ea7d.png)
+
 ## Pre-requisite to run this project
 * must have aws 'default' account 
 * Table name **'Movie'**, **'User'**, **'Review'** should be created in DynamoDB 
